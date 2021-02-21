@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {AuthCluster} from './auth-cluster';
+import {InitCluster} from './init-cluster';
+import {ProfileCluster} from './profile-cluster';
+import {useCurrentUser} from './hooks/current-user';
 
-function App() {
+export default function App() {
+  const currentUser = useCurrentUser();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <AuthCluster />
+      <ProfileCluster address={currentUser.addr} />
+      <ProfileCluster address='0xba1132bc08f82fe2'/>
+      <ProfileCluster address='0xf117a8efa34ffd58'/>
+      <InitCluster address={currentUser.addr} />
+    </>
   );
 }
-
-export default App;
